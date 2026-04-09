@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Indicadores Cash Cycle Conversion</title>
+<!-- Incluyendo XLSX.js desde CDN -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="CCC.css" />
+</head>
+<body>
+<header>
+  <h1>Indicadores Cash Cycle Conversion</h1>
+</header>
+
+<div class="container">
+  <div class="buttons">
+    <button id="download-template">TEMPLATE PARA DESCARGAR</button>
+    <input type="file" id="upload-file" accept=".xlsx" />
+    <!-- Nuevo botón para mostrar fórmulas -->
+    <button id="mostrar-formulas">Mostrar Fórmulas</button>
+  </div>
+
+  <div class="inputs">
+    <h2>Ingresar Datos</h2>
+    <div class="input-group">
+      <h3>Actual</h3>
+      <label>Account Receivable: <input type="number" id="ar-current" /></label>
+      <label>Total Credit Sales: <input type="number" id="sales-current" /></label>
+      <label>Average Inventory: <input type="number" id="inventory-current" /></label>
+      <label>Cost of Goods Sold: <input type="number" id="cogs-current" /></label>
+      <label>Average Account Payable: <input type="number" id="payable-current" /></label>
+    </div>
+    <div class="input-group">
+      <h3>Pasado</h3>
+      <label>Account Receivable: <input type="number" id="ar-last" /></label>
+      <label>Total Credit Sales: <input type="number" id="sales-last" /></label>
+      <label>Average Inventory: <input type="number" id="inventory-last" /></label>
+      <label>Cost of Goods Sold: <input type="number" id="cogs-last" /></label>
+      <label>Average Account Payable: <input type="number" id="payable-last" /></label>
+    </div>
+    <button id="calcular">Calcular Indicadores</button>
+  </div>
+
+  <div class="results">
+    <h2>Resultados</h2>
+    <table id="results-table">
+      <thead>
+        <tr>
+          <th>Indicador</th>
+          <th>Valor Actual</th>
+          <!-- Se intercambian las columnas -->
+          <th>% to OBJ</th>
+          <th>Valor Objetivo</th>
+          <th>Valor Pasado</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="Javascript/CCC.js"></script>
+
+<!-- Script adicional para mostrar fórmulas -->
+<script>
+  document.getElementById('mostrar-formulas').addEventListener('click', () => {
+    const formulas = `
+Fórmulas de Cálculo:
+
+Day Sales Outstanding (DSO) = (Account receivable / Total Credit Sales) * ${DAYS}
+Days Inventory Outstanding (DIO) = (Average Inventory / Cost of Goods Sold) * ${DAYS}
+Days Payable Outstanding (DPO) = (Average Account Payable / Cost of Goods Sold) * ${DAYS}
+Cash Conversion Cycle (CCC) = DSO + DIO - DPO
+    `;
+    alert(formulas);
+  });
+</script>
+</body>
+</html>
